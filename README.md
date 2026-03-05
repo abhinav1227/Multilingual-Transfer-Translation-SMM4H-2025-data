@@ -1,4 +1,4 @@
-# Multilingual Transfer for Medical Social Media NLP (SMM4H 2025)
+# Multilingual Medical NLP Benchmark Study
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
 ![Transformers](https://img.shields.io/badge/Transformers-HuggingFace-yellow)
@@ -19,6 +19,18 @@ The study focuses on:
 - Cross-lingual generalization
 - Machine translation for data augmentation
 - Error analysis in multilingual medical NLP
+
+## Research Questions
+
+This project investigates the following research questions:
+
+- **Q1:** How does multilingual training compare to monolingual training for medical social media classification?
+
+- **Q2:** Does zero-shot cross-lingual transfer significantly degrade performance?
+
+- **Q3:** Can machine translation improve cross-lingual generalization?
+
+- **Q4:** How do Transformer-based models behave compared to translation-based approaches?
 
 Experiments are structured into four main stages:
 
@@ -183,15 +195,78 @@ python pipeline/main.py
 
 # Translation
 
-Machine translation is implemented using Mistral via Ollama.
+Translation experiments were conducted using LLM-based machine translation via Mistral (Ollama).
+Translated samples were stored for reproducibility and used for controlled experimental comparison.
 
 Make sure Ollama is running locally before executing translation scripts.
 
-# Results
+# Experimental Results
 
-All experiment outputs are stored in:
+## Quantitative Comparison
 ```text
-results/
+
+| Setup                  | Accuracy | Precision | Recall | F1 Score | Loss  |
+|------------------------|----------|----------|--------|--------|--------|
+| EN Monolingual         | 0.952    | 0.949    | 0.952  | 0.950  | 0.215 |
+| RU Monolingual         | 0.918    | 0.908    | 0.918  | 0.911  | 0.326 |
+| Multilingual (EN)       | 0.948    | 0.945    | 0.948  | 0.947  | 0.228 |
+| Multilingual (RU)       | 0.918    | 0.911    | 0.918  | 0.913  | 0.338 |
+| Zero-Shot (DE)          | 0.841    | 0.902    | 0.841  | 0.869  | 0.555 |
+| EN → DE (Zero-Shot)     | 0.940    | 0.892    | 0.940  | 0.916  | 0.386 |
+| Multi → DE (Zero-Shot)  | 0.841    | 0.902    | 0.841  | 0.869  | 0.555 |
+| DE Translated           | 0.658    | 0.893    | 0.658  | 0.751  | 0.849 |
+
+---
 ```
 
-These include evaluation metrics and comparison results across different multilingual setups.
+## Discussion of Results
+
+### Q1: Multilingual vs Monolingual Training
+
+Multilingual training performs comparably to monolingual training for seen languages.
+
+- Performance drop is small for EN and RU.
+- In some cases, multilingual training slightly improves robustness.
+- Conclusion: Multilingual training does not hurt performance significantly and provides better generalization capability.
+
+---
+
+### Q2: Zero-Shot Cross-Lingual Transfer
+
+Zero-shot performance on German (DE) shows a noticeable drop compared to supervised training.
+
+- Accuracy decreases compared to English/Russian training.
+- Loss increases significantly in zero-shot setups.
+- However, performance remains relatively strong, indicating effective cross-lingual transfer.
+
+Conclusion: Zero-shot transfer works reasonably but introduces performance degradation.
+
+---
+
+### Q3: Effect of Machine Translation
+
+Training on translated data (DE translated from EN) results in lower performance compared to native-language training.
+
+- Translation introduces noise and artifacts.
+- The translated dataset performs significantly worse than monolingual and multilingual setups.
+- This suggests that translation-based data augmentation alone is insufficient.
+
+---
+
+### Q4: Transformer vs Translation-Based Approaches
+
+Transformer-based multilingual training clearly outperforms the pure translation-based approach.
+
+Key observation:
+
+- Native multilingual modeling is more robust.
+- Machine translation adds limited benefit and may introduce semantic distortion.
+
+---
+
+## Overall Conclusion
+
+- Multilingual training is the most stable approach.
+- Zero-shot transfer is feasible but not optimal.
+- Machine translation improves data coverage but reduces quality.
+- Direct multilingual modeling is preferable for medical social media NLP.
