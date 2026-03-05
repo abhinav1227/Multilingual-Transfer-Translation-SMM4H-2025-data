@@ -201,6 +201,11 @@ Translated samples were stored for reproducibility and used for controlled exper
 Make sure Ollama is running locally before executing translation scripts.
 
 # Experimental Results
+All experiment outputs are stored in:
+```text
+results/
+```
+These include evaluation metrics and comparison results across different multilingual setups.
 
 ## Quantitative Comparison
 ```text
