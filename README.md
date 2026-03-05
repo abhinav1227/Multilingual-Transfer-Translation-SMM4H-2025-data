@@ -1,12 +1,8 @@
-# Advanced NLP Project
-
-This repository contains the code for the Advanced NLP course project, consisting of two tasks:
-
-- **Task 1**: Multilingual Transfer and Translation in Medical Social Media NLP (SMM4H 2025 data)
+- **Objective**: Multilingual Transfer and Translation in Medical Social Media NLP (SMM4H 2025 data)
 
 ## Repository Structure
 .
-├── data/ # Task 1 datasets
+├── data/ # Task datasets
 │ ├── raw/ # Original SMM4H data (train.csv, test.csv)
 │ ├── processed/ # Preprocessed train/val/test splits per language
 │ │ ├── train_en.csv, val_en.csv, test_en.csv
@@ -14,16 +10,16 @@ This repository contains the code for the Advanced NLP course project, consistin
 │ │ └── train_de.csv, val_de.csv, test_de.csv
 │ └── translated/ # Machine-translated German data (translated_train_de.csv)
 │
-├── models/ # Saved fine-tuned models for Task 1
+├── models/ # Saved fine-tuned models
 │
 ├── notebooks/ # Jupyter notebook for exploratory analysis (main.ipynb)
 │
-├── pipeline/ # Core Python modules for Task 1
-│ ├── preprocessing.py # Data loading, cleaning, splitting(1.1)
-│ ├── translate.py # Translation using Mistral via Ollama(1.1)
+├── pipeline/ # Core Python modules 
+│ ├── preprocessing.py # Data loading, cleaning, splitting
+│ ├── translate.py # Translation using Mistral via Ollama
 │ ├── model_training.py # Training and evaluation functions 
 │ ├── train.py # Training loop and utilities
-│ ├── tasks.py # Task-specific experiment setups (1.3.1, 1.3.2, 1.3.3)
+│ ├── tasks.py # Task-specific experiment setups 
 │ ├── main.py # Entry point to run all experiments
 │ └── utils.py # Helper functions
 │
