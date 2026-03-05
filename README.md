@@ -29,39 +29,42 @@ Experiments are structured into four main stages:
 
 ---
 
-# Repository Structure
-data/
-├── raw/ # Original SMM4H dataset
-├── processed/ # Train / validation / test splits
-│ ├── train_en.csv
-│ ├── val_en.csv
-│ ├── test_en.csv
-│ ├── train_ru.csv
-│ ├── val_ru.csv
-│ ├── test_ru.csv
-│ └── train_de.csv
-└── translated/ # Machine translated data
+## Repository Structure
 
-models/ # Saved trained models
+```text
+data/
+├── raw/                         # Original SMM4H dataset
+├── processed/                   # Train / validation / test splits
+│   ├── train_en.csv
+│   ├── val_en.csv
+│   ├── test_en.csv
+│   ├── train_ru.csv
+│   ├── val_ru.csv
+│   ├── test_ru.csv
+│   └── train_de.csv
+│
+└── translated/                  # Machine translated data
+
+models/                          # Saved trained models
 
 notebooks/
-└── main.ipynb # Exploratory data analysis
+└── main.ipynb                   # Exploratory data analysis
 
 pipeline/
-├── preprocessing.py # Data cleaning and splitting
-├── translate.py # Machine translation (Mistral via Ollama)
-├── model_training.py # Model setup and evaluation
-├── train.py # Training loops
-├── tasks.py # Experiment setups
-├── utils.py # Utility functions
-└── main.py # Main experiment runner
+├── preprocessing.py             # Data cleaning and splitting
+├── translate.py                 # Machine translation (Mistral via Ollama)
+├── model_training.py            # Model setup and evaluation
+├── train.py                     # Training loops
+├── tasks.py                     # Experiment setups
+├── utils.py                     # Utility functions
+└── main.py                      # Main experiment runner
 
-results/ # Evaluation outputs
-scripts/ # Optional helper scripts
-.env # Environment variables
+results/                         # Evaluation outputs
+scripts/                         # Optional helper scripts
+.env                             # Environment variables
 README.md
-
 ---
+```
 
 # Task 1.1 — Language Selection & Data Preparation
 
@@ -166,7 +169,29 @@ The analysis also discusses:
 ```bash
 python -m venv venv
 source venv/bin/activate
+```
 
 ## 2. Install Dependencies
 ```bash
 pip install -r requirements.txt
+```
+
+## 3. Run Experiments
+```bash
+python pipeline/main.py
+```
+
+# Translation
+
+Machine translation is implemented using Mistral via Ollama.
+
+Make sure Ollama is running locally before executing translation scripts.
+
+# Results
+
+All experiment outputs are stored in:
+```text
+results/
+```
+
+These include evaluation metrics and comparison results across different multilingual setups.
